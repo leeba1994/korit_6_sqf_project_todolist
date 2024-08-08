@@ -2,13 +2,21 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import * as s from "./style";
 import ReactModal from "react-modal";
+import RegisterModal from "../RegisterModal/RegisterModal";
 
 function MainContainer({ children }) {
     const [ scroll, setScroll ] = useState({
         startY: 0,
         isDown: false
     });
+    const [ modalElement, setModalElement ] = useState(<></>);
     const containerRef = useRef();
+
+    useEffect(() => {
+        if(!!containerRef) {
+        setModalElement(<RegisterModal containerRef={containerRef} />);
+        }
+    }, [containerRef])
 
 
     const handleDown = useCallback((e) => setScroll({   //useCallback 함수를 랜더링시 재정의 방지
@@ -47,6 +55,7 @@ function MainContainer({ children }) {
             onMouseDown={handleDown}
             onMouseUp={handleUp} 
             ref={containerRef} >
+            {modalElement}
             {children}
         </div>
     );

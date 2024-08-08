@@ -32,8 +32,10 @@
 		- todo_tb
 			todoId		(PK, NN, AI)
 			userId		(NN)
-			content		(NN)
-			important	(NN)	1, 2, 3, 4
+			title		(NN)
+			content		()
+			important	(NN)	1, 2,
+			busy		(NN)	1, 2
 			status		(NN)	1, 2
 			todoDateTime	(NN)	yyyy-MM-dd hh:mm:ss / 구분을 위해 대문자 소문자
 			createDate	(NN)	yyyy-MM-dd hh:mm:ss / 구분을 위해 대문자 소문자 - 최초 등록

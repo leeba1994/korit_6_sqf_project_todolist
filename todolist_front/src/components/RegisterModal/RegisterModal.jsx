@@ -1,34 +1,53 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactModal from 'react-modal';
 import { useRecoilState } from 'recoil';
 import { registerModalAtom } from '../../atoms/ModalAtoms';
-ReactModal.setAppElement("#root");
+/** @jsxImportSource @emotion/react */
+import * as s from "./style";
+import RegisterTodo from '../RegisterTodo/RegisterTodo';
 
-function RegisterModal(props) {
+function RegisterModal({ containerRef }) {
     const [ isOpen, setOpen ] = useRecoilState(registerModalAtom);
+    const [ animation, setAnimation ] = useState("registerModalContentOpen");
 
-    const CloseModal = () => {
-        setOpen(false);
-
+    const closeModal = () => {
+        setAnimation("registerModalContentClose");
+        setTimeout(() => {
+            setAnimation("registerModalContentOpen");
+            setOpen(false);
+        }, 500);
     }
 
     return (
         <ReactModal
             style={{
-                content: {
+                overlay: {
                     position: "absolute",
-                    boxSizing: "border-box",
-                    margin: "0px auto",
-                    border: "none",
-                    width: "375px",
                     backgroundColor: "transparent",
+                },
 
+                content: {
+                    // top: "auto",
+                    // left: "0",
+                    // right: "0",
+                    // bottom: "0",
+                    // transform: "translateY(26%)",
+                    inset: "auto 0 0",
+                    boxSizing: "border-box",
+                    borderRadius: "10px", 
+                    padding: "0",
+                    width: "100%",
+                    height: "80%",
+                    animation: `${animation} 0.6s 1`,
+                    // animationTimingFunction: "ease-in-out",
                 }
             }}
             isOpen={isOpen}
-            onRequestClose={CloseModal}
-            >
-            
+            onRequestClose={closeModal}
+            ariaHideApp={false}
+            parentSelector={() => containerRef.current}
+        >
+            <RegisterTodo closeModal={closeModal} />
         </ReactModal>
     );
 }

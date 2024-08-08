@@ -5,7 +5,7 @@ import { IoIosWifi, IoIosBatteryFull } from "react-icons/io";
 import { IoCellularSharp } from "react-icons/io5";
 import { useEffect, useState } from "react";
 import MainContainer from "../MainConatiner/MainContainer";
-import RegisterModal from "../RegisterModal/RegisterModal";
+
 
 function MainLayout({ children }) {
     const [clock, setClock ] =useState("0:00");
@@ -27,10 +27,9 @@ function MainLayout({ children }) {
                 <div css={s.topBar}>
                     <div css={s.clock}>{clock}</div>
                     <div css={s.topBarCenter}></div>
-                    <div css={s.rightItems}><IoCellularSharp /> <IoIosWifi /> <IoIosBatteryFull /> </div>
+                    <div css={s.rightItems}><IoCellularSharp /><IoIosWifi /><IoIosBatteryFull /></div>
                 </div>
                 <MainContainer>
-                    <RegisterModal />
                     {children}
                 </MainContainer>
             </div>
